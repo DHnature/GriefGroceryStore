@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>登录界面</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+</head>
+<script src="jquery/jquery.min.js">
+</script>
+<script src="js/cookieUtil.js">
+</script>
+<body>
+	<section class="login-form-wrap">
+		<h1>用户登录</h1>
+		<form class="login-form" action="POST" action="#">
+			<label>
+				<input type="email" id="username" required placeholder="username">
+			</label>
+			<label>
+				<input type="password" id="password" required placeholder="password">
+			</label>			
+			<input type="submit"  id="login" value="Login">
+		</form>
+		<h5><a href="#">Forgot password</a></h5>
+	</section>
+<div style="text-align:center;clear:both">
+
+</div>
+</body>
+
+
+<script type="text/javascript">
+function displayProp(obj){      
+    var names="";         
+    for(var name in obj){         
+       names+=name+": "+obj[name]+", ";    
+    }    
+    alert(names);    
+}  
+
+ 	$("#login").click(function(){
+		login();		
+	}); 
+ 	
+ function progress(json){
+	 if(json.meta.state=="success"){
+		 alert("success");
+		 setCookie("user",json.data.user.userName,0);
+		 setCookie("account",json.data.user.account,0);
+		 alert(document.cookie);
+		 window.location.href="http://localhost:8080/GriefGroceryStore/index.html"; 
+	 }
+	 else{
+		 alert("failed");
+	 }
+	 
+ } 	
+   function login(){
+	   username=$("#username").val();
+	   password=$("#password").val();   
+       url="http://localhost:8080/GriefGroceryStore/Login?method=login&username="+username+"&password="+password;
+ 	$.ajax({
+		   type:'get',
+		   url:url,
+           dataType:'json',
+    	   success:function(json){
+    		   progress(json);
+    	   }   
+		});	  
+}   
+</script>
+</html>

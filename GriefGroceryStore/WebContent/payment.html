@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<script src="jquery/jquery.min.js"></script>
+<script src="js/cookieUtil.js"></script>
+<script src="js/bootstrap/3.3.6/bootstrap.min.js"></script>
+<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script>
+alert(document.cookie);
+</script>
+<head>
+<meta charset="UTF-8">
+<title>这是支付界面</title>
+
+
+
+
+</head>
+<body>
+
+<p> 用户名: </p>  <p id="username"> 未登录 </p>
+<p> 余额:  </p>  <p  id="account"> null </p>
+
+
+<table class="table table-bordered" id="tb" align="center" border="1" cellspacing="0">
+<tr>
+  
+   <td>名称</td>
+   <td>价格</td>
+   <td>库存</td>
+   <td>商家</td>
+</tr>
+
+</table>
+
+<div style="width:300px;margin:0 auto">
+<span class="text-primary"  font-size="100px"></span>
+</div>
+<div style="width:300px;margin:0 auto">
+<button id="pay" type="button" align="center" class="btn btn-primary" style="width:150px;">支付</button>
+</div>
+<script type="text/javascript">
+//显示用户信息
+$("#username").html(getCookie("user"));
+$("#account").html(getCookie("account"));
+//显示购买商品信息
+var productName=getCookie("productName");
+var productPrice=getCookie("productPrice");
+var productInventory=getCookie("productInventory");
+var productSeller=getCookie("productSeller");
+var tr=tb.insertRow(1);
+var td1 = tr.insertCell(0);
+td1.innerHTML=productName; 
+td1.setAttribute("style","width:15%;");
+var td2 = tr.insertCell(1);
+td2.innerHTML=productPrice;
+td2.setAttribute("style","width:25%;");
+var td3 = tr.insertCell(2);
+td3.innerHTML=productInventory;  
+td3.setAttribute("style","width:15%;");
+var td4 = tr.insertCell(3);
+td4.innerHTML=productSeller;  
+td4.setAttribute("style","width:15%;");
+</script>
+<script type="text/javascript">
+
+//购买成功后的回调函数
+function progress(json){
+	alert(json.meta.message);
+	location.reload();
+}
+
+//购买事件
+function pay(){
+	var username=getCookie("user");
+	var url="http://localhost:8080/GriefGroceryStore/User?method=paySingle&username="+username;
+	product=new Object();
+	product.productId=getCookie("productId");
+	product.productName=getCookie("productName");
+	product.productPrice=getCookie("productPrice");
+	product.productInventory=getCookie("productInventory");
+	product.productSeller=getCookie("productSeller");
+	var json={"product":JSON.stringify(product)};
+     alert(json);	
+	$.ajax({
+		   type:'post',
+		   url:url,
+		   data:json,
+           dataType:'json',          
+ 	       success:function(json){
+ 		   progress(json);
+ 	   },
+ 	       error:function(){
+ 	    	   alert("error!");
+ 	       }
+		});	  
+	
+}
+
+$("#pay").click(function(){	
+	pay();
+});
+</script>
+
+
+</body>
+</html>

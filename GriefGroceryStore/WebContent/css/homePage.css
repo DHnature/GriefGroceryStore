@@ -1,0 +1,79 @@
+html{
+	overflow:hidden;
+}
+html, body,#container{ margin:0; 
+	height:100%;
+}
+#container{
+	width:100%;
+	color:#696969;
+}
+
+#header{
+	width:100%;
+	height:25%;
+}
+#login{
+	float:left;
+	font-size:18px;
+	padding-left:30px;
+	padding-top:20px;
+	cursor: pointer;
+}
+#navBar{
+	float:right;
+	padding-top:70px;
+	padding-right:70px;
+}
+#navBar a{
+	padding-right:30px;
+	font-size:1.2em;
+	letter-spacing:.06em;
+    cursor: pointer;
+    font-weight: 400;
+    font-family:"微软雅黑";
+}
+#navBar nav{
+	float:left;
+}
+#navBar form{
+	float:right;
+}
+#navBar input{
+	width:160px;
+	height:20px;
+}
+#navBar button{
+	font-family:"微软雅黑";
+	height:26px;
+	background-color:white;
+	border:1px solid black;
+}
+
+#center{
+	height:55%;
+	padding-left:150px;
+	font-family:"微软雅黑";
+}
+#center article{
+	float:left;
+}
+#center h1{
+	font-size:40px;
+}
+#center div{
+	float:right;
+}
+#center img{
+	width:600px;
+	height:300px;
+}
+#footer{
+	background-color:#404040;
+	width:100%;
+	height:20%;
+	color:#F5F5DC;
+	font-size:20px;
+	font-weight:normal;
+	padding:25px 0;
+}
