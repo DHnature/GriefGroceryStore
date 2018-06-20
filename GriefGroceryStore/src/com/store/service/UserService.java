@@ -73,5 +73,37 @@ public class UserService {
 	
 	
 	
+	public JSONObject repassword(String username,String answer,String newPassword){
+		String result=userDao.repassword(username, answer,newPassword);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        if(result.contains("密码修改成功！！！")) {
+        	json=jsonContext.getSuccessObject(result, null, null);
+        }
+        else {
+            json=jsonContext.getFailedObject(result);
+        }
+		return json;
+		
+		
+	}
+	
+	public JSONObject getValidationProblem(String username){
+		String result=userDao.getValidationProblem(username);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        if(!result.contains("未登录")) {
+        	json=jsonContext.getSuccessObject(result, null, null);
+        }
+        else {
+            json=jsonContext.getFailedObject(result);
+        }
+		return json;
+		
+		
+	}
+	
+	
+	
 
 }

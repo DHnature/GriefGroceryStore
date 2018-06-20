@@ -71,7 +71,6 @@ public class UserServlet extends HttpServlet {
 	public void payCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		 String products=request.getParameter("products");
 		 String username=request.getParameter("username");
-
 		 JSONArray jsonArr=JSONArray.fromObject(products);  
 		 ArrayList<Product> productList=new ArrayList<>();
 		 for(int i=0;i<jsonArr.size();i++) {
@@ -79,7 +78,6 @@ public class UserServlet extends HttpServlet {
 			 productList.add(product);
 			 System.out.println(product.getProductName());
 		 }
-		 System.out.println(jsonArr.get(0).getClass());		
 		 UserService service=new UserService();
 		 JSONObject json=service.payCart(username, productList);
 		 response.getWriter().write(json.toString());
@@ -89,7 +87,7 @@ public class UserServlet extends HttpServlet {
 	
 	
 	
-	//添加购物车
+	//添加商品到购物车
     public void addOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
 		String productStr=request.getParameter("product");
@@ -100,6 +98,8 @@ public class UserServlet extends HttpServlet {
 		response.getWriter().write(json.toString());	
     	
     }
+    
+    
     //从购物车删除商品
     public void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
@@ -109,9 +109,28 @@ public class UserServlet extends HttpServlet {
 		UserService serivce=new UserService();
 		JSONObject json=serivce.deleteOrder(username, product);
 		response.getWriter().write(json.toString());	
-    	
-    		
+    	  		
     }
     
+    //获取用户的验证问题，目前暂定一名用户只有一个验证问题
+    
+    public void getValidationProblem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username=request.getParameter("username");
+		UserService serivce=new UserService();
+		JSONObject json=serivce.getValidationProblem(username);
+		response.getWriter().write(json.toString());
+    	
+    }
+
+    //密码修改
+    public void repassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username=request.getParameter("username");
+    	String answer=request.getParameter("answer");
+    	String newPassword=request.getParameter("newPassword");
+		UserService serivce=new UserService();
+		JSONObject json=serivce.repassword(username, answer,newPassword);
+		response.getWriter().write(json.toString());	
+    	  		
+    }
 
 }

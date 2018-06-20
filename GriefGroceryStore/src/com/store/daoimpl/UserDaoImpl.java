@@ -20,6 +20,8 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
       public UserDaoImpl() throws Exception {
 		// TODO Auto-generated constructor stub
 	}
+      
+     //用户登录 
 	@Override
 	public User login(String username,String password) {
         User user=new User();
@@ -43,11 +45,11 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 		return user;
 	}
 	
-	//
+	//直接在商品页面支付
 	@Override
 	public String paySingle(String username, Product product) {
 		// TODO Auto-generated method stub
-		//分别搜索买家和卖家的信息
+		//分别搜索买家和卖家的信息，判断用户是否存在
 		String sql1="select * from user where username=?";
 		String sql2="select * from user where username=?";
 		//更新商品信息，用户信息，卖家信息，
@@ -100,6 +102,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 		}			
 		return "支付成功！！！";		
 	}
+	
+	
+	//在购物车中支付
 	@Override
 	public String payCart(String username, List<Product> productList) {
 		// TODO Auto-generated method stub
@@ -177,6 +182,58 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 			e.printStackTrace();
 		}		
 		return "删除成功！！！";
+	}
+	
+	
+	
+	
+	
+	@Override
+	public String repassword(String username, String answer,String newPassword) {
+		// TODO Auto-generated method stub
+		String sql1="select * from user where username="+username;
+		String sql2="update user set password="+newPassword+"where username="+username;
+		try {
+			ResultSet rs=templateQuery(sql1);
+			if(rs.next()) {
+				String correctAnswer=rs.getString(5).split(",")[0];
+				if (correctAnswer!=answer) {
+					return "验证答案错误！！！";
+				}
+				else {
+					templateUpdate(sql2);
+				}	
+			}
+			else {
+				return "用户名不存在！！！";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
+	}
+
+	@Override
+	public String getValidationProblem(String username) {
+		// TODO Auto-generated method stub
+		String sql1="select * from user where username="+username;
+		try {
+			ResultSet rs=templateQuery(sql1);
+			if(rs.next()) {
+				return rs.getString(5).split(":")[0];
+			}
+			else {
+				return "未登录！！！";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	

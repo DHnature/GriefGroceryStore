@@ -48,11 +48,14 @@ function removeAllCookies(){
 ////验证是否登录
 function checkLogin(){
 	var username=getCookie("user");
-	alert("check!!!");
-	alert(username);
+
 	if(username==null||typeof(username)=="undefined"||username==0){
 		alert("请先登录！！！");
 		window.location.href="http://localhost:8080/GriefGroceryStore/login.html";  
+	}
+	else{
+		alert("已登录!!!用户名为:"+username);
+		
 	}
 }
 

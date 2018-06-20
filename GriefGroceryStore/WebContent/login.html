@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="UTF-8">
-  <title>登录界面</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes">
+<link rel="stylesheet" href="css/login.css" type="text/css"/>
+<title>登录</title>
 </head>
 <script src="jquery/jquery.min.js">
 </script>
 <script src="js/cookieUtil.js">
 </script>
 <body>
-	<section class="login-form-wrap">
-		<h1>用户登录</h1>
-		<form class="login-form" action="POST" action="#">
-			<label>
-				<input type="email" id="username" required placeholder="username">
-			</label>
-			<label>
-				<input type="password" id="password" required placeholder="password">
-			</label>			
-			<input type="submit"  id="login" value="Login">
-		</form>
-		<h5><a href="#">Forgot password</a></h5>
-	</section>
-<div style="text-align:center;clear:both">
+	<div id="container" >
+		<div id="ShopName">
+			<article>
+				<h1>解忧杂货铺</h1>
+				<h1>GriefGroceryStore</h1>
+				<p>欢迎来到解忧杂货铺，希望你能在这里买到你想要的一切</p>
+			</article>
 
-</div>
+		</div>
+		<div id="formBox">
+			<form>
+				用户名&nbsp;&nbsp;<input type="text" id="username"/><br><br><br>
+				密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="password"/><br><br><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="login">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="reset">取消</button>
+			</form>
+		</div>
+	</div>
 </body>
-
-
 <script type="text/javascript">
 function displayProp(obj){      
     var names="";         

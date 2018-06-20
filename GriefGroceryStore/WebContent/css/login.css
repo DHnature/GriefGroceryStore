@@ -1,0 +1,47 @@
+body,html,#container{
+	background-color:#F8F8FF;
+	width:100%;
+	margin:0;
+	position:relative;
+	font-family:"微软雅黑";
+	color:#696969;
+}
+#ShopName{
+	position:relative;
+	left:150px;
+	top:200px;
+	float:left;
+	width:40%;
+}
+#ShopName h1{
+	font-size:40px;
+}
+#formBox{
+	background-color:#6CA6CD;
+	width:400px;
+	height:500px;
+	font-size:18px;
+	position:relative;
+	right:140px;
+	top:100px;
+	float:right;
+	filter:Alpha(opacity=50);
+	background-img:url("/login.jpg");
+}
+#formBox form{
+	position:relative;
+	top:100px;
+	left:70px;
+}
+#formBox input{
+	width:200px;
+	height:20px;
+}
+#formBox button{
+	font-family:"微软雅黑";
+	color:#696969;
+	font-size:20px;
+	width:70px;
+	height:40px;
+	background-color:none;
+}

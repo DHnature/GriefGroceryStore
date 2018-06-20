@@ -13,5 +13,7 @@ public String paySingle(String username,Product product);
 public String payCart(String username,List<Product> productList);
 public String addOrder(String username,Product product);
 public String deleteOrder(String username,Product product);
+public String repassword(String username,String answer,String newPassword);
+public String getValidationProblem(String username);
 
 }

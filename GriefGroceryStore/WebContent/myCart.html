@@ -135,8 +135,6 @@ function load(json){
 var productList=json.data.productlist;
 for(var i=0;i<productList.length;i++){
 	   var product=JSON.stringify(productList[i])
-	//   sessionStorage.setItem("product"+i,product);   
-	//   alert(JSON.parse(sessionStorage.getItem("product"+i)).productId);
        var tr=tb.insertRow(i+1);
        var id="tr"+i;
        tr.setAttribute("id",id);
