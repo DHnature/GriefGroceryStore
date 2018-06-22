@@ -9,26 +9,64 @@
 <title>验证问题界面</title>
 </head>
 <body>
-<p >   这是验证问题！！！</p>
-<p id="ValidationProblem">   获取失败！！！</p>
+<p >   验证问题</p>
+<p class="text-info" id="validationProblem">   获取失败！！！</p>
+<input type="text" class="form-control" id="answer" placeholder="请输入验证问题答案">
+<button type="button" class="btn btn-primary" id="sumbit">提交</button>
 </body>
+
+
+
 <script type="text/javascript">
-
-checkLogin();
-
-
-/* function load(){
- var url="http://localhost:8080/GriefGroceryStore/User?method=getValidationProblem&username="+username";		
+var username=getCookie("user");
+//加载验证问题
+function loadProblem(){ 
+ var url="http://localhost:8080/GriefGroceryStore/User?method=getValidationProblem&username="+username;		
 	$.ajax({
 		   type:'post',
 		   url:url,
 		   dataType:'json',
 		   success:function(json){
-			   alert(json.meta.message)
+			   $("#validationProblem").html(json.meta.message);  
 		   }	   
 		});	
 }
 
-$("#ValidationProblem").html(load());  */
+
+function sumbitAnswer(){
+	var url="http://localhost:8080/GriefGroceryStore/User?method=validationProblemComfire&username="+username;		
+ 	json={"answer":$("#answer").val()};	
+ 	$.ajax({
+		   type:'post',
+		   url:url,
+		   data:json,
+		   dataType:'json',
+		   success:function(json){
+			   var msg=json.meta.message;
+			   alert(msg);
+ 			   if(msg=="验证成功！！！"){	 				  
+				   window.location.href="http://localhost:8080/GriefGroceryStore/repassword.html"; 
+			   } 			   
+		   }	   
+		});	 
+ 	
+}
+
+
 </script>
+
+
+
+<script type="text/javascript">
+//验证用户是否登录
+checkLogin();
+//加载验证问题
+loadProblem();
+//提交验证问题
+$("#sumbit").click(function(){
+	sumbitAnswer();
+});
+</script>
+
+
 </html>

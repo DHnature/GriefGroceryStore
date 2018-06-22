@@ -121,14 +121,28 @@ public class UserServlet extends HttpServlet {
 		response.getWriter().write(json.toString());
     	
     }
+    
+    //验证问题
+    public void validationProblemComfire(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username=request.getParameter("username");
+    	String answer=request.getParameter("answer");
+    	
+		UserService serivce=new UserService();
+		JSONObject json=serivce.validationProblemComfire(username,answer);
+		response.getWriter().write(json.toString());
+    	
+    	
+    }
+    
+    
 
     //密码修改
     public void repassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
-    	String answer=request.getParameter("answer");
     	String newPassword=request.getParameter("newPassword");
+    	System.out.println(newPassword);
 		UserService serivce=new UserService();
-		JSONObject json=serivce.repassword(username, answer,newPassword);
+		JSONObject json=serivce.repassword(username,newPassword);
 		response.getWriter().write(json.toString());	
     	  		
     }
