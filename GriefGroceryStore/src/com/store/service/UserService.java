@@ -73,8 +73,8 @@ public class UserService {
 	
 	
 	
-	public JSONObject repassword(String username,String newPassword){
-		String result=userDao.repassword(username, newPassword);
+	public JSONObject repassword(String username,String answer,String newPassword){
+		String result=userDao.repassword(username, answer,newPassword);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
         if(result.contains("密码修改成功！！！")) {
@@ -99,22 +99,11 @@ public class UserService {
             json=jsonContext.getFailedObject(result);
         }
 		return json;
-				
+		
+		
 	}
 	
-	public JSONObject validationProblemComfire(String username,String answer){
-		String result=userDao.validationProblemComfire(username,answer);
-		JsonContext jsonContext=new JsonContext();
-        JSONObject json=new JSONObject();
-        if(result.contains("验证成功")) {
-        	json=jsonContext.getSuccessObject(result, null, null);
-        }
-        else {
-            json=jsonContext.getFailedObject(result);
-        }
-		return json;
-				
-	}
+	
 	
 
 }

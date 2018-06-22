@@ -189,15 +189,20 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 	
 	
 	@Override
-	public String repassword(String username,String newPassword) {
+	public String repassword(String username, String answer,String newPassword) {
 		// TODO Auto-generated method stub
-		String sql1="select * from user where username='"+username+"'";
-		String sql2="update user set password='"+newPassword+"'"+"where username='"+username+"'";
+		String sql1="select * from user where username="+username;
+		String sql2="update user set password="+newPassword+"where username="+username;
 		try {
 			ResultSet rs=templateQuery(sql1);
-			if(rs.next()) {				
+			if(rs.next()) {
+				String correctAnswer=rs.getString(5).split(",")[0];
+				if (correctAnswer!=answer) {
+					return "验证答案错误！！！";
+				}
+				else {
 					templateUpdate(sql2);
-					return "密码修改成功！！！";
+				}	
 			}
 			else {
 				return "用户名不存在！！！";
@@ -212,21 +217,14 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 		return null;
 	}
 
-	//获取用户的验证问题
 	@Override
 	public String getValidationProblem(String username) {
 		// TODO Auto-generated method stub
-		String sql1="select * from user where username=?";
-		try(Connection conn=JdbcUtil.getInstance().getConnection();
-			PreparedStatement ps=conn.prepareStatement(sql1)) {
-			ps.setString(1, username);
-			ResultSet rs=ps.executeQuery();
+		String sql1="select * from user where username="+username;
+		try {
+			ResultSet rs=templateQuery(sql1);
 			if(rs.next()) {
-				if(rs.getString(5)!=null) {
-					return rs.getString(5).split(":")[0];
-				}
-				return "您没有设置验证问题";
-								
+				return rs.getString(5).split(":")[0];
 			}
 			else {
 				return "未登录！！！";
@@ -237,34 +235,8 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 		}
 		return null;
 	}
-
-	@Override
-	public String validationProblemComfire(String username, String answer) {
-		// TODO Auto-generated method stub		
-		String sql1="select * from user where username='"+username+"'";
-		try {
-			ResultSet rs=templateQuery(sql1);
-			if(rs.next()) {
-				if(rs.getString(5).split(":")[1].equals(answer)) {
-					return "验证成功！！！";
-				}
-				else {
-					return "验证失败！！！";
-				}
-			}
-			else {
-				return "用户未登录";
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
 	
 	
+
 
 }
