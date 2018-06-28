@@ -1,0 +1,5 @@
+/**
+ * 
+ */
+
+loadloginBar();

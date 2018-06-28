@@ -10,6 +10,10 @@
 <script src="js/cookieUtil.js">
 </script>
 <body>
+<!-- <iframe  name="content_iframe" height=40 src="loginBarFrame.html" frameborder=0>
+</iframe>  -->
+
+ 
 	<div id="container" >
 		<div id="ShopName">
 			<article>
@@ -21,53 +25,16 @@
 		</div>
 		<div id="formBox">
 			<form>
-				用户名&nbsp;&nbsp;<input type="text" id="username"/><br><br><br>
-				密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="password"/><br><br><br>
+				用户名&nbsp;&nbsp;<input type="text" required="required"  id="username"/><br><br><br>
+				密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" required="required"  id="password"/>&nbsp;&nbsp;<a href="repassword.html">忘记密码</a><br><br><br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="login">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="reset">取消</button>
+				<button type="sumbit" id="register">注册</button>
 			</form>
+			
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-function displayProp(obj){      
-    var names="";         
-    for(var name in obj){         
-       names+=name+": "+obj[name]+", ";    
-    }    
-    alert(names);    
-}  
-
- 	$("#login").click(function(){
-		login();		
-	}); 
- 	
- function progress(json){
-	 if(json.meta.state=="success"){
-		 alert("success");
-		 setCookie("user",json.data.user.userName,0);
-		 setCookie("account",json.data.user.account,0);
-		 alert(document.cookie);
-		 window.location.href="http://localhost:8080/GriefGroceryStore/index.html"; 
-	 }
-	 else{
-		 alert("failed");
-	 }
-	 
- } 	
-   function login(){
-	   username=$("#username").val();
-	   password=$("#password").val();   
-       url="http://localhost:8080/GriefGroceryStore/Login?method=login&username="+username+"&password="+password;
- 	$.ajax({
-		   type:'get',
-		   url:url,
-           dataType:'json',
-    	   success:function(json){
-    		   progress(json);
-    	   }   
-		});	  
-}   
+<script type="text/javascript" src="js/login.js">
 </script>
 </html>

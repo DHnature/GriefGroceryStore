@@ -1,5 +1,6 @@
 package com.store.service;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import com.store.dao.DaoFactory;
 import com.store.dao.UserDao;
 import com.store.json.JsonContext;
 import com.store.model.Product;
+import com.store.model.User;
+import com.store.util.DaoUtil;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
@@ -73,12 +76,12 @@ public class UserService {
 	
 	
 	
-	public JSONObject repassword(String username,String answer,String newPassword){
-		String result=userDao.repassword(username, answer,newPassword);
+	public JSONObject repassword(String username,String newPassword){
+		String result=userDao.repassword(username, newPassword);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
         if(result.contains("密码修改成功！！！")) {
-        	json=jsonContext.getSuccessObject(result, null, null);
+        	json=jsonContext.getSuccessObject("1", null, null);
         }
         else {
             json=jsonContext.getFailedObject(result);
@@ -89,21 +92,54 @@ public class UserService {
 	}
 	
 	public JSONObject getValidationProblem(String username){
-		String result=userDao.getValidationProblem(username);
+		String question=userDao.getValidationProblem(username);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
-        if(!result.contains("未登录")) {
-        	json=jsonContext.getSuccessObject(result, null, null);
+        if(!question.contains("未登录")) {
+        	json=jsonContext.getSuccessObject(question, null, null);
         }
         else {
-            json=jsonContext.getFailedObject(result);
+            json=jsonContext.getFailedObject(question);
         }
 		return json;
 		
 		
 	}
 	
+	public JSONObject usernameComfire(String username) {
+		JsonContext jsonContext=new JsonContext();
+		JSONObject json=new JSONObject();	
+		JSONObject json2=new JSONObject();
+		User user=DaoUtil.queryUserByUsername(username);
+    	if(user.getUserName()!=null) {
+    		String question=userDao.getValidationProblem(username);
+    		json2.put("question", question);
+    		json2.put("username", user.getUserName());
+    		json=jsonContext.getSuccessObject("1", json2, null);
+    		
+    	}
+    	else {
+    		json=jsonContext.getFailedObject("用户名不存在！！！");
+    	}
+		return json;
+	}
 	
+
+	public JSONObject validationProblemComfire(String username,String answer){
+		String result=userDao.validationProblemComfire(username,answer);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        JSONObject json2=new JSONObject();
+        if(result.contains("验证成功")) {
+        	json2.put("username", username);
+        	json=jsonContext.getSuccessObject("1", json2, null);
+        }
+        else {
+            json=jsonContext.getFailedObject(result);
+        }
+		return json;
+				
+	}
 	
 
 }

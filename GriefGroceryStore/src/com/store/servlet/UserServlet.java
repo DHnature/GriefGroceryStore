@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.SysexMessage;
 
+import com.store.json.JsonContext;
 import com.store.model.Product;
 import com.store.service.UserService;
+import com.store.util.DaoUtil;
 import com.store.util.ReflectUtil;
 
 import net.sf.json.JSON;
@@ -125,12 +127,29 @@ public class UserServlet extends HttpServlet {
     //密码修改
     public void repassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
-    	String answer=request.getParameter("answer");
     	String newPassword=request.getParameter("newPassword");
 		UserService serivce=new UserService();
-		JSONObject json=serivce.repassword(username, answer,newPassword);
-		response.getWriter().write(json.toString());	
-    	  		
+		JSONObject json=serivce.repassword(username,newPassword);
+		response.getWriter().write(json.toString());	    	  		
     }
+    //根据用户名判断用户是否存在
+    public void usernameComfire(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username=request.getParameter("username");
+        UserService service=new UserService();
+        System.out.println("test");
+    	JSONObject json=service.usernameComfire(username);     
+    	response.getWriter().write(json.toString());	
+    	
+    	
+    }
+    //问题验证
+    public void validationProblemComfire(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username=request.getParameter("username");
+    	String answer=request.getParameter("answer");
+		UserService serivce=new UserService();
+		JSONObject json=serivce.validationProblemComfire(username,answer);
+		response.getWriter().write(json.toString());    	
+    }
+    
 
 }

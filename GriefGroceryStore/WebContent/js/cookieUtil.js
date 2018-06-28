@@ -48,7 +48,6 @@ function removeAllCookies(){
 ////验证是否登录
 function checkLogin(){
 	var username=getCookie("user");
-
 	if(username==null||typeof(username)=="undefined"||username==0){
 		alert("请先登录！！！");
 		window.location.href="http://localhost:8080/GriefGroceryStore/login.html";  
@@ -58,6 +57,42 @@ function checkLogin(){
 		
 	}
 }
+
+function loadloginBar(){
+	var username=getCookie("user");
+	if(username==null||typeof(username)=="undefined"||username==0){
+		$("#login").replaceWith(
+				"<nav id='login'>" +
+				"<a href='http://localhost:8080/GriefGroceryStore/login.html' style='text-decoration:none;'>登录</a>" +
+				"|<a>注册</a href='http://localhost:8080/GriefGroceryStore/register.html' style='text-decoration:none;color:inherit;>" +
+				"</nav>"); 
+	}
+	else{
+		$("#login").replaceWith("<nav id='login'><a href='http://localhost:8080/GriefGroceryStore/personalSpace.html' style='text-decoration:none;color:red;'>"+"用户名:    "+username+"</a>|" +
+				                 "<a id='exit'>退出</a></nav>"); 
+		$("#exit").click(function(){
+			alert("test");
+			removeCookie("user");
+			location.reload();
+		});
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
 
 
 

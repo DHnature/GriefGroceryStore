@@ -1,5 +1,5 @@
 body,html,#container{
-	background-color:#F8F8FF;
+	
 	width:100%;
 	margin:0;
 	position:relative;
@@ -9,7 +9,7 @@ body,html,#container{
 #ShopName{
 	position:relative;
 	left:150px;
-	top:200px;
+	top:100px;
 	float:left;
 	width:40%;
 }
@@ -18,15 +18,14 @@ body,html,#container{
 }
 #formBox{
 	background-color:#6CA6CD;
-	width:400px;
-	height:500px;
+	width:450px;
+	height:400px;
 	font-size:18px;
 	position:relative;
 	right:140px;
 	top:100px;
 	float:right;
 	filter:Alpha(opacity=50);
-	background-img:url("/login.jpg");
 }
 #formBox form{
 	position:relative;
@@ -35,13 +34,33 @@ body,html,#container{
 }
 #formBox input{
 	width:200px;
-	height:20px;
+	height:30px;
 }
-#formBox button{
+#login {
 	font-family:"微软雅黑";
 	color:#696969;
-	font-size:20px;
+	font-size:20px;	
+	margin-left: 30px;
 	width:70px;
 	height:40px;
 	background-color:none;
+}
+
+#register {
+	font-family:"微软雅黑";
+	color:#696969;
+	font-size:20px;	
+	margin-right: 30px;
+	width:70px;
+	height:40px;
+	background-color:none;
+}
+
+a:hover,a:active{
+	color:#696969;
+	text-decoration:none;
+}
+a:link,a:visited{
+	color:#696969;
+	text-decoration:none;
 }
