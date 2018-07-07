@@ -37,6 +37,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao{
 				product.setProductPrice(rs.getDouble(3));
 				product.setProductInventory(rs.getInt(4));
 				product.setProductSeller(rs.getString(5));
+				product.setProductDes(rs.getString(6));
 				productList.add(product);	
 			}
 			

@@ -1,48 +1,21 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
-
+<title>全部商品</title>
+<link rel="stylesheet" href="css/allProducts.css" type="text/css"/>
 <script src="jquery/jquery.min.js"></script>
 <script src="js/cookieUtil.js"></script>
+<script src="js/loginBar.js"></script>
 <script src="js/bootstrap/3.3.6/bootstrap.min.js"></script>
-<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
-
-<title>主页</title>
+<script type="text/javascript" src="js/allProducts.js"></script>
 </head>
 <body>
-<p>商品界面，等彩铃来做</p>
-<p > 用户名: </p>  <p id="username"> 未登录 </p>
-<p> 余额: </p>    <p id="account"> 余额: </p>
-
-
-<table class="table table-bordered" id="tb" align="center" border="1" cellspacing="0">
-
-<tr>
-   <td>id</td>
-   <td>名称</td>
-   <td>价格</td>
-   <td>库存</td>
-   <td>商家</td>
-   <td>加入购物车</td>
-   <td>购买</td>
-</tr>
-</table>
-<a href="http://localhost:8080/GriefGroceryStore/myCart.html">购物车界面</a>
-
-
-<a href="http://localhost:8080/GriefGroceryStore/personalSpace.html">个人界面</a>
+<div id="loginBar">
+ <iframe height=40 src="loginBarFrame.html" frameborder=0></iframe>
+</div>
+   <div class="container">
+   		<div class="waterfall"></div>
+   </div>
 </body>
-
-<script type="text/javascript">
-var username=getCookie("user");
-$("#username").html(getCookie("user"));
-$("#account").html(getCookie("account"));
-
-</script>
-
-
-<script type="text/javascript"  src="js/allProducts.js">
-</script>
 </html>

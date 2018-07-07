@@ -16,4 +16,5 @@ public String deleteOrder(String username,Product product);
 public String repassword(String username,String newPassword);
 public String getValidationProblem(String username);
 public String validationProblemComfire(String username,String answer);
+public String regisiter(User user);
 }

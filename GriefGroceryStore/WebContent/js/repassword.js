@@ -60,14 +60,15 @@ function progress(json){
 function repassword(json){
 //修改密码界面		
 	   $("input").val("").focus();  
-	   $("p").html("请输入新密码");	   
+	   $("p").html("");	   
 	   $("#input").attr("type","password");
-	   $("#input").attr("id","password");	   
-	   $("#password").after("<input  id='comfirePassword' type='password' required='required'  />");
-	   $("<div style='margin-top:30px;margin-left:140px;'><p id='message' style='color:red' > </p></div>").insertAfter("#comfirePassword");	   
+	   $("#input").attr("id","password");	 
+	   $("#password").attr("placeholder","请输入新密码");	   
+	   $("#password").after("<input id='comfirePassword' style='width=20px';type='password' required='required' placeholder='请再次输入新密码' />");	     
+	   $("<p id='message' style='color:red;margin-top:30px;margin-left:140px;'> </p>").insertAfter("#comfirePassword");	   	   
+	   $("#comfirePassword").after(" <span>Hello world3!</span>");
 	   $("#sumbit").unbind();
-	   var username=json.data.username;
-	   	   
+	   var username=json.data.username;	   	   
 	   $('#password').blur(function () {
 		   if($("#password").val()==""){
 			   $("#message").css("color","red");

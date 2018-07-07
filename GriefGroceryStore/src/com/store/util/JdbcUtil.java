@@ -9,6 +9,7 @@ import com.store.constants.SystemConstants;
 public class JdbcUtil {
 	private static JdbcUtil instance=new JdbcUtil();
 	private JdbcUtil() {}
+	//懒汉式单例模式
 	public static JdbcUtil getInstance() {
 		return instance;
 	}

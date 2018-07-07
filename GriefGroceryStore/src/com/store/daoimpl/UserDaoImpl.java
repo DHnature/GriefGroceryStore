@@ -266,6 +266,29 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 		
 		
 	}
+
+	@Override
+	public String regisiter(User user) {
+		// TODO Auto-generated method stub
+		String sql="insert into user values(null,?,?,?,?)";
+		try (Connection conn=JdbcUtil.getInstance().getConnection();
+			 PreparedStatement ps=conn.prepareStatement(sql)){
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getUserPassword());
+			ps.setDouble(3, user.getAccount());
+			ps.setString(4, user.getValidationProblem());
+			ps.execute();
+			return "注册成功！！！";		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block				
+			e.printStackTrace();
+			return "注册失败！！！";
+		}
+		
+		
+		
+		
+	}
 	
 	
 

@@ -14,12 +14,12 @@ public class ProductService {
 	private DaoFactory factory=DaoFactory.getInstance();
 	private ProductDao productDao =factory.creatProductDao();
 	
-	public JSONObject getAllProduct() {
+	public JSONObject getAllProducts() {
 		ArrayList<Product> list=(ArrayList<Product>) productDao.getAllProductList();
 		JSONObject json = new JSONObject();
 		JSONObject json1=new JSONObject();
 		JsonContext jsonContext=new JsonContext();
-		json.put("allProduct",list);
+		json.put("allProducts",list);
 		json1=jsonContext.getSuccessObject("主页加载成功！！！", json, null);
 		System.out.println(json1);
 		return json1;

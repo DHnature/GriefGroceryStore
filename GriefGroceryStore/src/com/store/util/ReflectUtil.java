@@ -20,7 +20,7 @@ public class ReflectUtil {
 		Class c=clazz;
 		Method method=null;
 		try {
-			
+			//获取c类中名称为methodName，参数为HttpServletRequest.class, HttpServletResponse.class的方法
 			method=c.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			
 		} catch (Exception e) {
@@ -28,6 +28,7 @@ public class ReflectUtil {
 			e.printStackTrace();	
 	}
 		try {
+			//调用method方法，注意这里的第一个参数类型需要为object,所以需要通过clazz.newInstance()创建实例。
 			method.invoke(clazz.newInstance(), request,response);
 			
 		} catch (Exception e) {

@@ -140,6 +140,22 @@ public class UserService {
 		return json;
 				
 	}
+
+
+	public JSONObject regisiter(User user) {
+		String result=userDao.regisiter(user);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        JSONObject json2=new JSONObject();
+        if(result.contains("注册成功")) {
+        	json=jsonContext.getSuccessObject("1", null, null);
+        }
+        else {
+            json=jsonContext.getFailedObject(result);
+        }
+		return json;
+				
+	}
 	
 
 }

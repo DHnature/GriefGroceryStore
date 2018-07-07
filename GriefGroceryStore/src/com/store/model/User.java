@@ -5,6 +5,7 @@ public class User {
 	    private String userName;
 	    private String userPassword;
 	    private double account;
+	    private String validationProblem;
 	    public int getUserId() {
 	        return userId;
 	    }
@@ -29,4 +30,12 @@ public class User {
 	    public void setAccount(double account) {
 	    	this.account=account;
 	    }
+	    public void setValidationProblem(String validationProblem) {
+	    	this.validationProblem=validationProblem;
+	    }
+	    public String getValidationProblem() {
+	    	return validationProblem;
+	    }
+	    
+	    
 }

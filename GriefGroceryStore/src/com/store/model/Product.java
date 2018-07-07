@@ -7,6 +7,7 @@ public class Product {
 	private String productName;
 	private int productInventory;
 	private String productSeller;
+	private String productDes;
 	public int getProductId() {
 		return productId;
 	}
@@ -36,5 +37,12 @@ public class Product {
     }
     public void setProductSeller(String productSeller) {
     	this.productSeller=productSeller;
+    }
+    
+    public String getProductDes() {
+    	return productDes;
+    }
+    public void setProductDes(String productDes) {
+    	this.productDes=productDes;
     }
 }

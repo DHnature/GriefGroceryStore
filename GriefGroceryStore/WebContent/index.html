@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="css/homePage.css" type="text/css"/>
 <script src="jquery/jquery.min.js"></script>
 <script src="js/cookieUtil.js"></script>
+<script src="js/loginBar.js"></script>
 <script type="text/javascript">
 </script>
 </head>
@@ -13,10 +14,9 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<nav id="login">
-				<a href="http://localhost:8080/GriefGroceryStore/login.html" style="text-decoration:none;color:inherit;">登录</a>|
-				<a>注册</a>
-			</nav>
+          <div id="loginBar">
+             <iframe height=40 src="loginBarFrame.html" frameborder=0></iframe>
+          </div>
 			<div id="navBar">
 				<nav>
 					<a>首页</a>
@@ -49,7 +49,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-loadloginBar();
-</script>
 </html>

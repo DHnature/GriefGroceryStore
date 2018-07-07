@@ -1,9 +1,7 @@
 /**
  * 
  */
-$(document).ready(function(){
-	
-});
+
 
 function displayProp(obj){      
     var names="";         
@@ -13,9 +11,7 @@ function displayProp(obj){
     alert(names);    
 }  
 
- 	$("#login").click(function(){
-		login();		
-	}); 
+
  	
  function progress(json){
 	 if(json.meta.state=="success"){
@@ -42,4 +38,17 @@ function displayProp(obj){
     		   progress(json);
     	   }   
 		});	  
-}   
+ 
+   }	
+
+    $("#login").click(function(){
+		login();		
+	}); 
+    
+ 	$("#register").click(function(){
+ 		 window.location.href="http://localhost:8080/GriefGroceryStore/register.html";		
+	}); 
+   
+   
+  	
+   

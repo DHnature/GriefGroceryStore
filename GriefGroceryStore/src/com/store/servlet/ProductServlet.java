@@ -55,10 +55,10 @@ public class ProductServlet extends HttpServlet {
 	
 	//用于在主页中显示所有商品的信息
 	
-	public void getAllProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void getAllProducts(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	     
 		ProductService service=new ProductService();
-		JSONObject json=service.getAllProduct();
+		JSONObject json=service.getAllProducts();
         response.getWriter().write(json.toString());		
 	}
 	

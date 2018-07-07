@@ -13,6 +13,7 @@ import javax.sound.midi.SysexMessage;
 
 import com.store.json.JsonContext;
 import com.store.model.Product;
+import com.store.model.User;
 import com.store.service.UserService;
 import com.store.util.DaoUtil;
 import com.store.util.ReflectUtil;
@@ -61,9 +62,9 @@ public class UserServlet extends HttpServlet {
 	public void paySingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    String username=request.getParameter("username");
 		String productStr=request.getParameter("product");
-		//将json字符串转化为java对象
-		JSONObject jsonObject = JSONObject.fromObject(productStr);
-		Product  product= (Product)JSONObject.toBean(jsonObject,Product.class);	
+		//将json字符串转化为java对象		
+		JSONObject jsonObject = JSONObject.fromObject(productStr);	
+		Product  product= (Product)JSONObject.toBean(jsonObject,Product.class);			
 		UserService serivce=new UserService();
 		JSONObject json=serivce.paySingle(username, product);
 		response.getWriter().write(json.toString());	
@@ -136,7 +137,6 @@ public class UserServlet extends HttpServlet {
     public void usernameComfire(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
         UserService service=new UserService();
-        System.out.println("test");
     	JSONObject json=service.usernameComfire(username);     
     	response.getWriter().write(json.toString());	
     	
@@ -150,6 +150,19 @@ public class UserServlet extends HttpServlet {
 		JSONObject json=serivce.validationProblemComfire(username,answer);
 		response.getWriter().write(json.toString());    	
     }
+    
+    //用户注册
+    public void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String userInfo=request.getParameter("userInfo");
+    	JSONObject jsonObject = JSONObject.fromObject(userInfo);
+    	User user= (User)JSONObject.toBean(jsonObject,User.class);
+    	user.setAccount(10000);
+        UserService service=new UserService();
+        JSONObject json=service.regisiter(user);
+        response.getWriter().write(json.toString());    
+    }
+    
+     
     
 
 }
