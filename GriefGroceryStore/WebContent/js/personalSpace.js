@@ -1,20 +1,29 @@
 $(document).ready(function(){
-	var name = window.sessionStorage.getItem("userName");
-	var data = "userName="+name;
-	var accountInfo = "accountInfo";
-	$("#baseInfo").click(function(){clickEvent("baseInfo")});
-	$("#orderItem").click(function(){clickEvent("orderItem")});
-	$("#itemCar").click(function(){clickEvent("itemCar")});
-	$("#accountInfo").click(function(){clickEvent("accountInfo")});
+	var username=getCookie("user");	
+	$("#userInfo").mouseenter(function(){clickEvent("userInfo")});
+	$("#orderItem").mouseenter(function(){clickEvent("orderItem")});
+	$("#cart").mouseenter(function(){clickEvent("cart")});
+	$("#accountInfo").mouseenter(function(){clickEvent("userInfo")});
 	
-	function clickEvent(url){
+	function clickEvent(module){
+		var url;
+		if(module=="userInfo"){
+	      url="http://localhost:8080/GriefGroceryStore/User?method=getUserInfo&username="+username;
+		}
+		if(module=="cart"){
+		  url="http://localhost:8080/GriefGroceryStore/Order?method=getCartProductList&username="+username;
+		}
+		if(module=="orderItem"){
+			url="http://localhost:8080/GriefGroceryStore/Order?method=getOrder&username="+username;
+		}
 			$.ajax({
 			method:"post",
 			url:url,
-			data:data,
 			success:function(json){
+				
+				$("#content").html(json);
 				var obj = JSON.parse(json);
-				prograss(obj,url);
+				progress(obj,url);
 			},
 			error:function(){
 				console.log("失败");
@@ -22,8 +31,8 @@ $(document).ready(function(){
 		});
 	}	
 	
-	function prograss(obj,url){
-		if(url == "baseInfo"){
+	function prograss(obj,module){
+		if(module == "baseInfo"){
 			prograssBaseInfo(obj);
 		}
 	}

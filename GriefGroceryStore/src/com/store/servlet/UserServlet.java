@@ -1,25 +1,15 @@
 package com.store.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.SysexMessage;
-
-import com.store.json.JsonContext;
-import com.store.model.Product;
 import com.store.model.User;
 import com.store.service.UserService;
-import com.store.util.DaoUtil;
 import com.store.util.ReflectUtil;
-
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -44,9 +34,9 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");//内容类型，解析为javascript代码或html代码
 		response.setCharacterEncoding("utf-8");//内容编码，防止出现中文乱码
-		response.setHeader("Access-Control-Allow-Origin", "*"); //Access-Control-Allow-Origin允许跨域
-		                             //所谓跨域就是，在a.com域下，访问b.com域下的资源；出于安全的考虑，浏览器允许跨域写，而不允许跨域读，
-		System.out.println(request.getParameter("method"));
+		response.setHeader("Access-Control-Allow-Origin", "*");/* Access-Control-Allow-Origin允许跨域
+		                                                                                                                所谓跨域就是，在a.com域下，访问b.com域下的资源；出于安全的考虑，
+		                                                                                                                 浏览器允许跨域写，而不允许跨域读，*/		
 		ReflectUtil.invokeMethod(this.getClass(), request, response);
 	}
 
@@ -58,65 +48,18 @@ public class UserServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	//单独购买一件商品
-	public void paySingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	    String username=request.getParameter("username");
-		String productStr=request.getParameter("product");
-		//将json字符串转化为java对象		
-		JSONObject jsonObject = JSONObject.fromObject(productStr);	
-		Product  product= (Product)JSONObject.toBean(jsonObject,Product.class);			
-		UserService serivce=new UserService();
-		JSONObject json=serivce.paySingle(username, product);
-		response.getWriter().write(json.toString());	
-	}
 	
-	//在购物车中购买商品
-	public void payCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		 String products=request.getParameter("products");
-		 String username=request.getParameter("username");
-		 JSONArray jsonArr=JSONArray.fromObject(products);  
-		 ArrayList<Product> productList=new ArrayList<>();
-		 for(int i=0;i<jsonArr.size();i++) {
-			 Product  product= (Product) JSONObject.toBean(jsonArr.getJSONObject(i),Product.class);	
-			 productList.add(product);
-			 System.out.println(product.getProductName());
-		 }
-		 UserService service=new UserService();
-		 JSONObject json=service.payCart(username, productList);
-		 response.getWriter().write(json.toString());
-	}
-	
-	
-	
-	
-	
-	//添加商品到购物车
-    public void addOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String username=request.getParameter("username");
-		String productStr=request.getParameter("product");
-		JSONObject jsonObject = JSONObject.fromObject(productStr);
-		Product  product= (Product)JSONObject.toBean(jsonObject,Product.class);
-		UserService serivce=new UserService();
-		JSONObject json=serivce.addOrder(username, product);
-		response.getWriter().write(json.toString());	
-    	
-    }
-    
-    
-    //从购物车删除商品
-    public void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String username=request.getParameter("username");
-    	String productStr=request.getParameter("product");
-		JSONObject jsonObject = JSONObject.fromObject(productStr);
-		Product  product= (Product)JSONObject.toBean(jsonObject,Product.class);
-		UserService serivce=new UserService();
-		JSONObject json=serivce.deleteOrder(username, product);
-		response.getWriter().write(json.toString());	
-    	  		
-    }
-    
     //获取用户的验证问题，目前暂定一名用户只有一个验证问题
-    
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserService service=new UserService();
+		System.out.println("test");
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		JSONObject json=service.login(username, password);
+		response.getWriter().write(json.toString());
+    }
+	
+	
     public void getValidationProblem(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username=request.getParameter("username");
 		UserService serivce=new UserService();
@@ -160,6 +103,24 @@ public class UserServlet extends HttpServlet {
         UserService service=new UserService();
         JSONObject json=service.regisiter(user);
         response.getWriter().write(json.toString());    
+    }
+    //上传用户头像
+    public void uploadProfilePhoto(HttpServletRequest request, HttpServletResponse response) {      	
+    }
+    
+    //加载用户头像
+    public void getProfilePhoto(HttpServletRequest request, HttpServletResponse response) throws IOException{    	
+    	 String username=request.getParameter("username");
+    	 UserService service=new UserService();
+         JSONObject json=service.getProfilePhoto(username);
+         response.getWriter().write(json.toString());      	 	
+    }
+    //获取用户所有信息
+    public void getUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+   	    String username=request.getParameter("username");
+   	    UserService service=new UserService();
+        JSONObject json=service.getUserInfo(username);
+        response.getWriter().write(json.toString());   
     }
     
      

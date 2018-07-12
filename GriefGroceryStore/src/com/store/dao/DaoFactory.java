@@ -1,5 +1,6 @@
 package com.store.dao;
 
+import com.store.daoimpl.OrderDaoImpl;
 import com.store.daoimpl.ProductDaoImpl;
 import com.store.daoimpl.UserDaoImpl;
 
@@ -37,6 +38,18 @@ public class DaoFactory {
 			e.printStackTrace();
 		}
 		return userDao;
+		
+	}
+	
+	public OrderDao creatOrderDao() {
+		OrderDao orderDao=null;
+		try {
+			orderDao=new OrderDaoImpl();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return orderDao;
 		
 	}
 	

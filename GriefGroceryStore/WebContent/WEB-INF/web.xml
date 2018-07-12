@@ -5,21 +5,14 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>CartServlet</servlet-name>
-    <servlet-class>com.store.servlet.CartServlet</servlet-class>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.store.servlet.OrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CartServlet</servlet-name>
-    <url-pattern>/Cart</url-pattern>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/Order</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.store.servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/Login</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>ProductServlet</servlet-name>
     <servlet-class>com.store.servlet.ProductServlet</servlet-class>

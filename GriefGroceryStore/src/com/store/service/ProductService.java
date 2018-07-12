@@ -25,14 +25,6 @@ public class ProductService {
 		return json1;
 		
 	}
-	public JSONObject getCartProductList(String username) {		
-		ArrayList<Product> list=(ArrayList<Product>) productDao.getCartProductList(username);
-		JSONObject json = new JSONObject();
-		json.put("productlist", list);
-		JSONObject json1=new JSONObject();
-		JsonContext jsonContext=new JsonContext();
-		json1=jsonContext.getSuccessObject("加载购物车页面成功！！！",json,null);
-		return json1;
-	}
+
 
 }

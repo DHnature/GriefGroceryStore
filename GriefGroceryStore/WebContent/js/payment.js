@@ -33,7 +33,7 @@ function progress(json){
 //购买事件
 function pay(){
 	var username=getCookie("user");
-	var url="http://localhost:8080/GriefGroceryStore/User?method=paySingle&username="+username;
+	var url="http://localhost:8080/GriefGroceryStore/Order?method=paySingle&username="+username;
 	product=new Object();
 	product.productId=getCookie("productId");
 	product.productName=getCookie("productName");

@@ -1,6 +1,7 @@
 package com.store.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.store.daoimpl.ProductDaoImpl;
+import com.store.json.JsonContext;
 import com.store.model.Product;
 import com.store.model.User;
 import com.store.service.ProductService;
@@ -62,13 +64,9 @@ public class ProductServlet extends HttpServlet {
         response.getWriter().write(json.toString());		
 	}
 	
-	public void getCartProductList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String username=request.getParameter("username");
-		ProductService service=new ProductService();
-		JSONObject json=service.getCartProductList(username);		
-        response.getWriter().write(json.toString());		
-	}
-	
+
+
+
 
 	
 	

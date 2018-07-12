@@ -39,39 +39,14 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao{
 				product.setProductSeller(rs.getString(5));
 				product.setProductDes(rs.getString(6));
 				productList.add(product);	
-			}
-			
-			
+			}			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("查找失败！");
+			
 		}		
 		return productList;
 	}
 	
-	public List<Product> getCartProductList(String username){
-		ArrayList<Product> productList=new ArrayList<>();
-		User user=DaoUtil.queryUserByUsername(username);
-		String sql="select * from orderItem where uid="+user.getUserId();
-	    try {
-			ResultSet rs=templateQuery(sql);
-			while(rs.next()) {
-				//根据pid返回对应的product对象
-				Product product=DaoUtil.queryProductByPid(rs.getInt(4));
-				productList.add(product);	
-			}	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return productList;
-		
-		
-		
-		
-		
-		
-		
-	}
+	
 }

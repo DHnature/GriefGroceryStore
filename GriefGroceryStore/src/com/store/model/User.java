@@ -6,6 +6,7 @@ public class User {
 	    private String userPassword;
 	    private double account;
 	    private String validationProblem;
+	    private String imgUrl;
 	    public int getUserId() {
 	        return userId;
 	    }
@@ -35,6 +36,12 @@ public class User {
 	    }
 	    public String getValidationProblem() {
 	    	return validationProblem;
+	    }
+	    public int getImgUrl() {
+	        return userId;
+	    }
+	    public void setImgUrl(String  imgUrl) {
+	        this.imgUrl = imgUrl;
 	    }
 	    
 	    

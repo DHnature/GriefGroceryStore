@@ -1,8 +1,8 @@
 package com.store.service;
 
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import com.store.dao.DaoFactory;
 import com.store.dao.UserDao;
@@ -10,8 +10,6 @@ import com.store.json.JsonContext;
 import com.store.model.Product;
 import com.store.model.User;
 import com.store.util.DaoUtil;
-
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 public class UserService {
@@ -19,60 +17,6 @@ public class UserService {
 	UserDao userDao=factory.creatUserDao();
 	
 	
-	public JSONObject paySingle(String username,Product product) {
-        String payResult=userDao.paySingle(username, product);
-        JsonContext jsonContext=new JsonContext();
-        JSONObject json=new JSONObject();
-        if(payResult.contains("支付成功！！！")) {
-        	json=jsonContext.getSuccessObject(payResult, null, null);
-        }
-        else {
-            json=jsonContext.getFailedObject(payResult);
-        }
-		return json;
-	}
-	
-	
-	public JSONObject payCart(String username,ArrayList<Product> productList) {
-		String payResult=userDao.payCart(username, productList);
-        JsonContext jsonContext=new JsonContext();
-        JSONObject json=new JSONObject();
-        if(payResult.contains("支付成功！！！")) {
-        	json=jsonContext.getSuccessObject(payResult, null, null);
-        }
-        else {
-            json=jsonContext.getFailedObject(payResult);
-        }
-		return json;
-	}
-	
-	public JSONObject addOrder(String username,Product product) {
-		String result=userDao.addOrder(username, product);
-		JsonContext jsonContext=new JsonContext();
-        JSONObject json=new JSONObject();
-        if(result.contains("添加成功！！！")) {
-        	json=jsonContext.getSuccessObject(result, null, null);
-        }
-        else {
-            json=jsonContext.getFailedObject(result);
-        }
-		return json;
-		
-	}
-	
-	public JSONObject deleteOrder(String username,Product product) {
-		String result=userDao.deleteOrder(username, product);
-		JsonContext jsonContext=new JsonContext();
-        JSONObject json=new JSONObject();
-        if(result.contains("删除成功！！！")) {
-        	json=jsonContext.getSuccessObject(result, null, null);
-        }
-        else {
-            json=jsonContext.getFailedObject(result);
-        }
-		return json;
-		
-	}
 	
 	
 	
@@ -80,7 +24,7 @@ public class UserService {
 		String result=userDao.repassword(username, newPassword);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
-        if(result.contains("密码修改成功！！！")) {
+        if(result.contains("success")) {
         	json=jsonContext.getSuccessObject("1", null, null);
         }
         else {
@@ -95,7 +39,7 @@ public class UserService {
 		String question=userDao.getValidationProblem(username);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
-        if(!question.contains("未登录")) {
+        if(question.contains("success")) {
         	json=jsonContext.getSuccessObject(question, null, null);
         }
         else {
@@ -130,7 +74,7 @@ public class UserService {
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
         JSONObject json2=new JSONObject();
-        if(result.contains("验证成功")) {
+        if(result.contains("success")) {
         	json2.put("username", username);
         	json=jsonContext.getSuccessObject("1", json2, null);
         }
@@ -146,8 +90,7 @@ public class UserService {
 		String result=userDao.regisiter(user);
 		JsonContext jsonContext=new JsonContext();
         JSONObject json=new JSONObject();
-        JSONObject json2=new JSONObject();
-        if(result.contains("注册成功")) {
+        if(result.contains("success")) {
         	json=jsonContext.getSuccessObject("1", null, null);
         }
         else {
@@ -155,6 +98,64 @@ public class UserService {
         }
 		return json;
 				
+	}
+	
+	public JSONObject getProfilePhoto(String username) {
+		String result=userDao.getProfilePhoto(username);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        JSONObject json1=new JSONObject();
+        if(result.contains("success")) {
+        	json1.put("imgurl", result);
+        	json=jsonContext.getSuccessObject("1", json1, null);
+        }
+        else {
+            json=jsonContext.getFailedObject(result);
+        }
+		return json;
+
+		
+	}
+
+
+	public JSONObject getUserInfo(String username) {
+		Map<String,String> result=userDao.getUserInfo(username);
+		JsonContext jsonContext=new JsonContext();
+        JSONObject json=new JSONObject();
+        JSONObject json1=new JSONObject();
+        if(result!=null) {
+        	json1.put("userInfo", result);
+        	json=jsonContext.getSuccessObject("1", json1, null);
+        }
+        else {
+            json=jsonContext.getFailedObject("0");
+        }
+		return json;
+	}
+
+	public JSONObject login(String username, String password) {
+		DaoFactory factory=DaoFactory.getInstance();
+		UserDao userDao=factory.creatUserDao();
+		JsonContext jsonContext=new JsonContext();
+		JSONObject jsonUser=new JSONObject();
+		JSONObject json=new JSONObject();
+		User user;
+		boolean isSuccess=false;
+		user=userDao.login(username, password);
+		
+		if(user.getUserName()!=null) {
+			System.out.println("username为"+username +"   password为"+password+"    存在！！！");
+			jsonUser.put("user", user);
+			System.out.println(jsonUser.get("user"));
+			json=jsonContext.getSuccessObject("登录成功！！！", jsonUser, null);
+		}
+		else {
+			System.out.println("username为"+username +"   password为"+password+"    不存在！！！");
+			 json=jsonContext.getFailedObject("登录失败！！！");
+			
+		}
+	
+		return json;
 	}
 	
 

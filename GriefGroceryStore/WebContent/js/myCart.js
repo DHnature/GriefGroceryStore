@@ -60,7 +60,7 @@ function pay(){
 
 
 //加载购物车信息
-url="http://localhost:8080/GriefGroceryStore/Product?method=getCartProductList&username="+username;
+url="http://localhost:8080/GriefGroceryStore/Order?method=getCartProductList&username="+username;
 $.ajax({
 	   type:'get',
 	   url:url,
@@ -119,7 +119,7 @@ function addItem(product,checkboxId){
 
 //确认支付按钮的点击事件
  $('#compirePayBtn').click(function(){	
-	var url="http://localhost:8080/GriefGroceryStore/User?method=payCart&username="+username;
+	var url="http://localhost:8080/GriefGroceryStore/Order?method=payCart&username="+username;
 	$.ajax({
 		   type:'post',
 		   url:url,

@@ -28,9 +28,9 @@ function displayProp(obj){
  } 	
    function login(){
 	   username=$("#username").val();
-	   password=$("#password").val();   
-       url="http://localhost:8080/GriefGroceryStore/Login?method=login&username="+username+"&password="+password;
- 	$.ajax({
+	   password=$("#password").val(); 
+       url="http://localhost:8080/GriefGroceryStore/User?method=login&username="+username+"&password="+password;
+       $.ajax({
 		   type:'get',
 		   url:url,
            dataType:'json',

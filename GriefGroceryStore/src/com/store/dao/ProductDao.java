@@ -7,7 +7,7 @@ import com.store.model.OrderItem;
 
 public interface ProductDao {
 	
-	public List<Product> getCartProductList(String username);
+
 	public List<Product> getAllProductList();
 	
 	

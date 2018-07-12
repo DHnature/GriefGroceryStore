@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="css/personalSpace.css" type="text/css"/>
 <script src="js/jquery.min.js"></script>
 <script src="js/personalSpace.js"></script>
+<script src="js/cookieUtil.js"></script>
+<script src="js/loginBar.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -15,15 +17,16 @@
 			</div>
 			<nav id="topRightNav">
 				<span></span>
-				<a href=>退出  | </a>
-				<a href=>注册</a>
+                <div id="loginBar">
+                  <iframe height=40 src="loginBarFrame.html" frameborder=0></iframe>
+                </div>
 			</nav>
 		</header>
 		<center>
 			<nav id="leftNav">
-				<a id="baseInfo">基本资料</a>
+				<a id="userInfo">基本资料</a>
 				<a id="orderItem">购买记录</a>
-				<a id="itemCar">购物车</a>
+				<a id="cart">购物车</a>
 				<a id="accountInfo">个人财务</a>
 				<a href="index.html">回到首页</a>
 			</nav>
